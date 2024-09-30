@@ -45,11 +45,23 @@ public class E242ValidAnagramSolution {
             return false;
         }
         char[] charArray = s.toCharArray();
-        Arrays.sort(charArray);
+        sort(charArray);
         String s1 =String.valueOf(charArray);
         char[] charArray2 = t.toCharArray();
-        Arrays.sort(charArray2);
+        sort(charArray2);
         String s2 =String.valueOf(charArray2);
         return s1.equals(s2);
+    }
+
+    public void sort(char[] chars){
+        for(int i = 0 ;i < chars.length;i++){
+            for(int j = i+1;j<chars.length;j++){
+                if(chars[i]>chars[j]){
+                    char tmp = chars[i];
+                    chars[i] = chars[j];
+                    chars[j]= tmp;
+                }
+            }
+        }
     }
 }
