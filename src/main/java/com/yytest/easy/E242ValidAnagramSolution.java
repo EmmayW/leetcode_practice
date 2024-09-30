@@ -1,5 +1,6 @@
 package com.yytest.easy;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,30 +45,11 @@ public class E242ValidAnagramSolution {
             return false;
         }
         char[] charArray = s.toCharArray();
-        Map<Character, Integer> characterIntegerMap = new HashMap<>();
-        for (Character character : charArray) {
-            Integer i = characterIntegerMap.get(character);
-            if (i == null) {
-                i = 1;
-            } else {
-                i++;
-            }
-            characterIntegerMap.put(character, i);
-        }
-        char[] charTArray = t.toCharArray();
-        for (Character character : charTArray) {
-            Integer i = characterIntegerMap.get(character);
-            if (i == null) {
-                return false;
-            } else {
-                i--;
-            }
-            if (i == 0) {
-                characterIntegerMap.remove(character);
-            } else {
-                characterIntegerMap.put(character, i);
-            }
-        }
-        return characterIntegerMap.isEmpty();
+        Arrays.sort(charArray);
+        String s1 =String.valueOf(charArray);
+        char[] charArray2 = t.toCharArray();
+        Arrays.sort(charArray2);
+        String s2 =String.valueOf(charArray2);
+        return s1.equals(s2);
     }
 }
