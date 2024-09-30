@@ -45,15 +45,15 @@ public class E242ValidAnagramSolution {
             return false;
         }
         char[] charArray = s.toCharArray();
-        sort(charArray);
+        bubbleSort(charArray);
         String s1 =String.valueOf(charArray);
         char[] charArray2 = t.toCharArray();
-        sort(charArray2);
+        bubbleSort(charArray2);
         String s2 =String.valueOf(charArray2);
         return s1.equals(s2);
     }
 
-    public void sort(char[] chars){
+    public void bubbleSort(char[] chars){
         for(int i = 0 ;i < chars.length;i++){
             for(int j = i+1;j<chars.length;j++){
                 if(chars[i]>chars[j]){
@@ -64,4 +64,5 @@ public class E242ValidAnagramSolution {
             }
         }
     }
+
 }
