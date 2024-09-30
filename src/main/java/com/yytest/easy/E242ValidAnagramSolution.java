@@ -55,22 +55,19 @@ public class E242ValidAnagramSolution {
             characterIntegerMap.put(character, i);
         }
         char[] charTArray = t.toCharArray();
-        Map<Character, Integer> characterIntegerSecondMap = new HashMap<>();
         for (Character character : charTArray) {
-            Integer i = characterIntegerSecondMap.get(character);
+            Integer i = characterIntegerMap.get(character);
             if (i == null) {
-                i = 1;
-            } else {
-                i++;
-            }
-            characterIntegerSecondMap.put(character, i);
-        }
-        for (Map.Entry<Character, Integer> entrySet : characterIntegerMap.entrySet()) {
-            Integer i = characterIntegerSecondMap.get(entrySet.getKey());
-            if (i == null || !i.equals(entrySet.getValue())) {
                 return false;
+            } else {
+                i--;
+            }
+            if (i == 0) {
+                characterIntegerMap.remove(character);
+            } else {
+                characterIntegerMap.put(character, i);
             }
         }
-        return true;
+        return characterIntegerMap.isEmpty();
     }
 }
