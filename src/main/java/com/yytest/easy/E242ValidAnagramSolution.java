@@ -3,6 +3,7 @@ package com.yytest.easy;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @Description 242. Valid Anagram
@@ -44,25 +45,64 @@ public class E242ValidAnagramSolution {
         if (s.length() != t.length()) {
             return false;
         }
+
         char[] charArray = s.toCharArray();
-        bubbleSort(charArray);
-        String s1 =String.valueOf(charArray);
+        quickSort(charArray, 0, charArray.length - 1);
+        String s1 = String.valueOf(charArray);
         char[] charArray2 = t.toCharArray();
-        bubbleSort(charArray2);
-        String s2 =String.valueOf(charArray2);
+        quickSort(charArray2, 0, charArray.length - 1);
+        String s2 = String.valueOf(charArray2);
         return s1.equals(s2);
     }
 
-    public void bubbleSort(char[] chars){
-        for(int i = 0 ;i < chars.length;i++){
-            for(int j = i+1;j<chars.length;j++){
-                if(chars[i]>chars[j]){
+
+    public void bubbleSort(char[] chars) {
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = i + 1; j < chars.length; j++) {
+                if (chars[i] > chars[j]) {
                     char tmp = chars[i];
                     chars[i] = chars[j];
-                    chars[j]= tmp;
+                    chars[j] = tmp;
                 }
             }
         }
     }
+
+    public void quickSort(char[] chars, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int pivotIndex = partition(chars, low, high);
+        quickSort(chars, low, pivotIndex - 1);
+        quickSort(chars, pivotIndex + 1, high);
+
+    }
+
+    public int partition(char[] chars, int low, int high) {
+        char pivot = chars[low];
+        int left = low + 1;
+        int right = high;
+
+        while (left <= right) {
+            while (left <= right && chars[left] < pivot) {
+                left++;
+            }
+            while (left <= right && chars[right] > pivot) {
+                right--;
+            }
+            if (left < right) {
+                swap(chars, left, right);
+            }
+        }
+        swap(chars, low, right);
+        return right;
+    }
+
+    void swap(char[] arr, int i, int j) {
+        char tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
 
 }
