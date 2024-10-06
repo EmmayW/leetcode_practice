@@ -1,12 +1,7 @@
 package com.yytest.medium;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.Collector;
 
 /**
  * @Description 347. Top K Frequent Elements
@@ -44,6 +39,24 @@ public class M347TopKElementSolution {
         Map<Integer, Integer> map = new HashMap<>();
         for (int num : nums) map.put(num, map.getOrDefault(num, 0) + 1);
 
-        return map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).limit(k).mapToInt(Map.Entry::getKey).toArray();
+        //return map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).limit(k).mapToInt(Map.Entry::getKey).toArray();
+
+        Map<Integer, List<Integer>> countMap = new HashMap<>();
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (!countMap.containsKey(entry.getValue())) {
+                countMap.put(entry.getValue(), new ArrayList<>());
+            }
+
+            countMap.get(entry.getValue()).add(entry.getKey());
+        }
+        Integer[] integers = countMap.keySet().stream().toArray(Integer[]::new);
+
+
+        Arrays.sort(integers, Collections.reverseOrder());
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < Math.min(k, integers.length) && result.size() < k; i++) {
+            result.addAll(countMap.get(integers[i]));
+        }
+        return result.stream().mapToInt(Integer::intValue).toArray();
     }
 }
