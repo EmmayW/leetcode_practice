@@ -1,6 +1,6 @@
 package com.yytest.easy;
 
-import com.yytest.converter.StringArrayConverter;
+import com.yytest.converter.StringIntegerArrayConverter;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,7 +19,7 @@ public class E217DuplicateIntSolutionTest {
             "1;2;3;3,true",
             "1;2;3;4,false"
     })
-    public void hasDuplicate(@ConvertWith(StringArrayConverter.class) int[] arr, boolean expectedResult){
+    public void hasDuplicate(@ConvertWith(StringIntegerArrayConverter.class) int[] arr, boolean expectedResult){
         E217DuplicateIntSolution e217DuplicateIntSolution =new E217DuplicateIntSolution();
         assertEquals(expectedResult, e217DuplicateIntSolution.hasDuplicate(arr));
     }

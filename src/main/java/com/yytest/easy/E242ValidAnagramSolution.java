@@ -45,7 +45,7 @@ public class E242ValidAnagramSolution {
         if (s.length() != t.length()) {
             return false;
         }
-
+        Arrays.sort(s.toCharArray());
         char[] charArray = s.toCharArray();
         quickSort(charArray, 0, charArray.length - 1);
         String s1 = String.valueOf(charArray);

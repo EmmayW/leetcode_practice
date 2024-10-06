@@ -1,6 +1,6 @@
 package com.yytest.easy;
 
-import com.yytest.converter.StringArrayConverter;
+import com.yytest.converter.StringIntegerArrayConverter;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -25,7 +25,7 @@ class E242ValidAnagramSolutionTest {
     @ParameterizedTest
     @CsvSource({
             "10;16;28;13;2;21;5;18"})
-    public void quickSort(@ConvertWith(StringArrayConverter.class) int[] arr) {
+    public void quickSort(@ConvertWith(StringIntegerArrayConverter.class) int[] arr) {
 
         E242ValidAnagramSolution solution = new E242ValidAnagramSolution();
 //        solution.quickSort(arr,0,arr.length-1);
@@ -36,6 +36,5 @@ class E242ValidAnagramSolutionTest {
                         .collect(Collectors.joining(", "))
         );
 
-//        assertEquals(expected, );
     }
 }
