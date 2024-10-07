@@ -29,7 +29,7 @@ class M271EncodeAndDecodeStringsSolutionTest {
     @Test
     void decode() {
 //        String input = "xoo~6myno6vy\u0080o6\u0083y\u007F";
-        String input = "002we003say001:003yes010!@#$%^&*()";
+        String input = "004lint004code004love003you";
 //        String input = "!";
         List<String> result = m271EncodeAndDecodeStringsSolution.decode(input);
         result.forEach(System.out::println);

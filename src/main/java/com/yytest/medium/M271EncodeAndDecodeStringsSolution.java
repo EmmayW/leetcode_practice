@@ -3,6 +3,7 @@ package com.yytest.medium;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @Description String Encode and Decode
@@ -30,12 +31,13 @@ import java.util.List;
  * @Date 2024-10-06
  */
 public class M271EncodeAndDecodeStringsSolution {
+    int strSize = 3;
 
     public String encode(List<String> strs) {
         if (strs == null || strs.size() == 0) return "";
         StringBuilder sb = new StringBuilder();
         for (String str : strs) {
-            sb.append(String.format("%03d",str.length()));
+            sb.append(String.format("%0" + strSize + "d", str.length()));
             sb.append(str);
         }
 
@@ -43,14 +45,20 @@ public class M271EncodeAndDecodeStringsSolution {
     }
 
 
-
     public List<String> decode(String str) {
         List<String> result = new ArrayList<>();
         int index = 0;
-        while(index < str.length()) {
-            Integer strLength = Integer.valueOf(str.substring(index,index+3));
-            result.add(str.substring(index+3, index+3+strLength));
-            index  = index + 3 + strLength;
+
+        char[] strCount = new char[strSize];
+        while (index < str.length()) {
+
+            str.getChars(index, index + strSize, strCount, 0);
+
+            Integer strLength = Integer.valueOf(String.valueOf(strCount));
+            char[] chars = new char[strLength];
+            str.getChars(index + strSize, index + strSize+strLength, chars, 0);
+            result.add(String.valueOf(chars));
+            index = index + strSize + strLength;
         }
 
 
